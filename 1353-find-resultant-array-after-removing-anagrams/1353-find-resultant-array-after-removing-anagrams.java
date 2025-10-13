@@ -2,29 +2,28 @@ import java.util.*;
 
 class Solution {
     public List<String> removeAnagrams(String[] words) {
+        //Approach2
         List<String> result = new ArrayList<>();
+        if (words == null || words.length == 0) return result;
+        
         result.add(words[0]); 
-
+        
         for (int i = 1; i < words.length; i++) {
-            String prev = result.get(result.size() - 1);
-            String curr = words[i];
-
-            if (!areTheyAnagram(prev, curr)) {
-                result.add(curr);
+            String prevSorted = sortString(result.get(result.size() - 1));
+            String currSorted = sortString(words[i]);
+            
+            if (!currSorted.equals(prevSorted)) {
+                result.add(words[i]);
             }
         }
+        
         return result;
     }
-
-    private boolean areTheyAnagram(String s1, String s2) {
-        return getCharFrequency(s1).equals(getCharFrequency(s2));
-    }
-
-    private Map<Character, Integer> getCharFrequency(String s) {
-        Map<Character, Integer> freq = new HashMap<>();
-        for (char c : s.toCharArray()) {
-            freq.put(c, freq.getOrDefault(c, 0) + 1);
-        }
-        return freq;
+    
+    // Helper method to sort characters of a string
+    private String sortString(String s) {
+        char[] chars = s.toCharArray();
+        Arrays.sort(chars);
+        return new String(chars);
     }
 }
