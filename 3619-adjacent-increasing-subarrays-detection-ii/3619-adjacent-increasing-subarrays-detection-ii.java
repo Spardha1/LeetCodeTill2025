@@ -5,16 +5,16 @@ class Solution {
 
         for (int i = 1; i < n; i++) {
             if (nums.get(i) > nums.get(i - 1)) {
-                curr++;  // still increasing
+                curr++;  
             } else {
-                // calculate possible k values
+                
                 maxK = Math.max(maxK, Math.max(curr / 2, Math.min(prev, curr)));
-                prev = curr;  // move current run to previous
-                curr = 1;     // reset
+                prev = curr;  
+                curr = 1;    
             }
         }
 
-        // final check after loop ends
+        
         maxK = Math.max(maxK, Math.max(curr / 2, Math.min(prev, curr)));
 
         return maxK;
